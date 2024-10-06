@@ -68,3 +68,41 @@
 
 ![](./images/ios.png)
 
+
+## Chapter5
+
+根据行为而不是表示方式定义的类型称为抽象数据类型(Abstract Data Type)。本章主要介绍五个类别，Vector、Stack、Queue、Map 和 Set。
+
+#### Vector
+
+* 构造函数
+  * `explicit vector( const Allocator& alloc );` 初始化空容器
+  * `explicit vector( size_type count );` 构造 count 个默认值的容器
+  * `explicit vector( size_type count, const T& value = T(), const Allocator& alloc = Allocator() );` 构造 count 个 元素值为 value 的容器
+  * `vector( InputIt first, InputIt last, const Allocator& alloc = Allocator() );` 构造拥有范围[first, last)内容的容器
+* push_back(value) 将元素 value 追加到容器末尾
+* insert() 将元素插入到容器的指定位置
+  * `iterator insert( const_iterator pos, const T& value );` 将元素 value 插入到容器 pos 之前
+  * `iterator insert( const_iterator pos, size_type count, const T& value );` 在容器 pos 之前插入count 个元素 value 的副本
+  * `iterator insert( const_iterator pos, InputIt first, InputIt last );` 在容器 pos 之前插入来自范围[first, last)的元素
+  * `iterator insert( const_iterator pos, std::initializer_list<T> ilist );` 在容器 pos 之前插入初始化列表的元素
+  * `vector( const vector& other );` 拷贝构造函数
+  * `vector( std::initializer_list<T> init, const Allocator& alloc = Allocator() );` 使用初始化列表构造容器
+* erase 从容器擦除指定元素
+  * `iterator erase( iterator pos );` 移除容器 pos 处的元素
+  * `iterator erase( iterator first, iterator last );` 移除容器 [first, last) 区间的元素
+* 指定元素的获取
+  * `reference at( size_type pos );` 返回指定位置的元素引用，并且做边界检查
+  * `reference operator[]( size_type pos );` 返回指定位置的元素引用，不做边界检查
+* `size_type size() const;` 返回容器元素个数
+* `void clear();` 清除容器中所有元素
+
+#### Stack
+
+栈结构中数据遵循先进后出的原则。
+
+* `void push( const value_type& value );` 将元素 value 推到栈顶
+* `reference top();` 返回栈顶元素的引用
+* `void pop();` 移除栈顶元素
+* `size_type size() const;` 返回栈中元素个数
+* ` 
