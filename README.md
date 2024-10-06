@@ -105,4 +105,14 @@
 * `reference top();` 返回栈顶元素的引用
 * `void pop();` 移除栈顶元素
 * `size_type size() const;` 返回栈中元素个数
-* ` 
+
+#### Queue
+
+数据结构中存储元素使用先进先出（First In, Fisrt Out, FIFO）策略的称为队列。
+
+* `void push( const value_type& value );` 将元素 value 入队
+* `void pop();` 移除队列前端元素，无返回值
+* `reference front();` 返回队列前端元素的引用，即最高进入队列的元素
+* `reference back();` 返回最近进入队列的元素引用
+* `bool empty() const;` 检查队列是否为空
+* `size_type size() const;` 返回队列中的元素个数
