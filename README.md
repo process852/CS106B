@@ -116,3 +116,45 @@
 * `reference back();` 返回最近进入队列的元素引用
 * `bool empty() const;` 检查队列是否为空
 * `size_type size() const;` 返回队列中的元素个数
+
+#### Map
+
+映射的概念类似于字典，可以通过一个单词找对其对应的解释。Map 提供了称为 Key 和 Value 之间的关联。C++ 中 Map是一种
+**有序**关联容器，它包含**唯一键**的键值对。
+
+* 构造函数
+  * `explicit map( const Allocator& alloc );` 创建空的容器
+  * `template< class InputIt > map( InputIt first, InputIt last, const Compare& comp = Compare(),const Allocator& alloc = Allocator() );` 范围构造容器
+  * `map( std::initializer_list<value_type> init,const Compare& comp = Compare(),const Allocator& alloc = Allocator() );` 用初始化列表构造容器
+* 修改器
+  * `std::pair<iterator, bool> insert( const value_type& value );` 将元素插入容器，并返回一个 `std::pair`
+  * `iterator insert( iterator pos, const value_type& value );` 在 value 插入到 pos 之前的位置
+  * `template< class InputIt > void insert( InputIt first, InputIt last );` 插入来自范围 [first, last)范围内的元素
+* 元素访问
+  * `T& at( const Key& key );` 返回指定键值的元素的引用，若不存在对应的键值，则抛出`std::out_of_range`类型异常。
+  * `T& operator[]( const Key& key );` 返回指定键值的元素的引用
+
+
+#### Set
+
+Set 类抽象了数学中的集合概念，该容器中的元素是无序的且每个元素只能出现一次。但是C++ std库中的set被实现为有序集合。
+
+* 构造函数
+  * `set();` 构造空的集合容器
+  * `template< class InputIt > set( InputIt first, InputIt last, const Compare& comp = Compare(),const Allocator& alloc = Allocator() );` 以范围[first, last)内元素构造集合容器
+  * `set( const set& other );` 拷贝构造函数
+  * `set( std::initializer_list<value_type> init, const Compare& comp = Compare(),const Allocator& alloc = Allocator() );` 以初始化列表元素构造集合容器
+* 容量
+  * `bool empty() const;` 检查集合容器是否为空
+  * `size_type size() const;` 返回集合容器的元素个数
+* 修改器
+  * `std::pair<iterator, bool> insert( const value_type& value );` 将元素插入集合容器
+  * `iterator insert( iterator pos, const value_type& value );` 将元素插入到位置 pos 之前
+  * `iterator insert( iterator pos, const value_type& value );` 将范围[first, last)元素插入容器
+  * `void insert( std::initializer_list<value_type> ilist );` 将初始化列表元素插入容器
+  * `iterator erase( iterator pos );` 移除指定位置的元素
+  * `iterator erase( iterator first, iterator last );` 移除指定范围内的元素
+  * `size_type erase( const Key& key );` 移除键值等于key的元素
+  * `size_type count( const Key& key ) const;` 返回容器中键值等于key的元素个数，由于集合容器元素具有唯一性，只能返回0或1
+  * `template< class C2 > void merge( std::set<Key, C2, Allocator>& source );` 尝试提取source中的每个元素到当前容器中，并用`*this`的比较对象插入到`*this`。若`*this`存在source中的键值，则不提取该元素。合并过程不复制和移动元素，只会重定向容器结点的内部指针。
+  * `iterator find( const Key& key );` 寻找键值等于key的元素并返回其位置，若不存在，则返回尾后迭代器（end()）
