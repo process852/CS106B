@@ -157,4 +157,83 @@ Set 类抽象了数学中的集合概念，该容器中的元素是无序的且�
   * `size_type erase( const Key& key );` 移除键值等于key的元素
   * `size_type count( const Key& key ) const;` 返回容器中键值等于key的元素个数，由于集合容器元素具有唯一性，只能返回0或1
   * `template< class C2 > void merge( std::set<Key, C2, Allocator>& source );` 尝试提取source中的每个元素到当前容器中，并用`*this`的比较对象插入到`*this`。若`*this`存在source中的键值，则不提取该元素。合并过程不复制和移动元素，只会重定向容器结点的内部指针。
-  * `iterator find( const Key& key );` 寻找键值等于key的元素并返回其位置，若不存在，则返回尾后迭代器（end()）
+  * `iterator find( const Key& key );` 寻找键值等于key的元素并返回其位置，若不存在，则返回尾后迭代器（end()
+
+## Chapter 6 Designing Classes
+
+#### Representing points
+
+* 结构体定义
+
+```C++
+// 使用点运算符访问成员
+struct Point{
+  int x;
+  int y;
+};
+
+Point p;
+p.x = 10;
+p.y = 2;
+```
+
+* 类（class）定义
+
+```C++
+class Point{
+public:
+    Point(){
+    };
+    Point(int cx, int cy){
+        x = cx;
+        y = cy;
+    }
+    int Getx(){
+        return x;
+    }
+    int Gety(){
+        return y;
+    }
+    void showPoint(){
+        cout << "(" << x <<", " << y << ")" << endl;
+    }
+private:
+    int x;
+    int y;
+};
+```
+
+#### Operator overloading(操作符重载)
+
+```C++
+class Point{
+public:
+    // ...
+    // 友元函数
+    friend ostream& operator<<(ostream& out, Point p);
+private:
+    int x;
+    int y;
+};
+// 运算符重载
+ostream& operator<<(ostream& out, Point p){
+    out << "(" << p.x <<", " << p.y << ")";
+    return out;
+}
+```
+
+* 重载 `++` 运算符，存在前缀`++`和后缀`++`两种形式
+
+```C++
+// 重载前缀++
+type operator++(type ..., ){
+  ...
+}
+// 重载后缀++
+type operator++(type ..., int){
+  ...
+}
+```
+
+#### Rational numbers
+
