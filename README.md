@@ -251,3 +251,75 @@ type operator++(type ..., int){
 #### 常量
 
 * nullptr 用于区分空指针和0。
+
+* constexpr 常量表达式，用于在编译期间计算，获取确定值，提供代码性能
+
+* 初始化列表的概念绑定至类型上，称之为 std::initializer_list，允许函数像其它类型参数一样传递
+
+```C++
+void foo(initializer_list<int> x){
+    for(auto it = x.begin(); it != x.end(); it++){
+        cout << *it << endl;
+    }
+}
+```
+
+* 结构化绑定
+
+```C++
+tuple<int, double, string> f(){
+    return make_tuple(1, 2.3, "hello");
+}
+
+int main(){
+    auto [x, y, z] = f();
+    cout << x << y << z << endl;
+    return 0;
+}
+```
+
+* 类型推导，关键字 `auto`和`decltype`实现了类型推导
+  * `auto` 无法用于函数传参，且无法用于数组类型推导
+  * `decltype`是为了解决`auto`只能推导变量， `decltype(表达式)`
+  * 尾返回类型推导
+
+#### 控制流
+
+* `if constexpr`
+
+```C++
+#include <iostream>
+
+template<typename T>
+auto print_type_info(const T& t) {
+    // 编译期间确定条件判断
+    if constexpr (std::is_integral<T>::value) {
+        return t + 1;
+    } else {
+        return t + 0.001;
+    }
+}
+int main() {
+    std::cout << print_type_info(5) << std::endl;
+    std::cout << print_type_info(3.14) << std::endl;
+}
+```
+
+* 区间 for 迭代
+
+```C++
+#include <iostream>
+#include <vector>
+#include <algorithm>
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4};
+    if (auto itr = std::find(vec.begin(), vec.end(), 3); itr != vec.end()) *itr = 4;
+    for (auto element : vec)
+        std::cout << element << std::endl; // read only
+    for (auto &element : vec) {
+        element += 1;                      // writeable
+    }
+    for (auto element : vec)
+        std::cout << element << std::endl; // read only
+}
+```
