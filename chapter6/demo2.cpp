@@ -3,6 +3,12 @@
 #include <iomanip>
 
 using namespace std;
+class RationalNumber{
+
+private:
+    int num;
+    int den;
+};
 
 int main(){
     double a = 1.0 / 2;
