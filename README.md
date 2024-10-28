@@ -323,3 +323,85 @@ int main() {
         std::cout << element << std::endl; // read only
 }
 ```
+
+#### 模板
+
+* 类型别名模板，模板是用来产生类型的。
+
+```C++
+typedef int (*process)(void *); // 函数指针
+using NewProcess = int(*)(void *); // using 定义别名函数指针
+
+// 类型别名模板
+template<typename T>
+using TrueDarkMagic = MagicType<std::vector<T>, std::string>;
+int main() {
+    TrueDarkMagic<bool> you;
+}
+```
+
+* 默认模板参数
+
+```C++
+template<typename T = int, typename U = int>
+auto add(T x, U y) -> decltype(x+y) {
+    return x+y;
+}
+```
+
+* 变长参数模板，允许任意个数、任意类别的模板参数
+
+```C++
+// 变长参数模板
+template<typename... Ts> class Magic;
+// 不定长参数函数
+template<typename... Args> void printf(const std::string &str, Args... args);
+```
+
+
+```C++
+#include <iostream>
+using namespace std;
+
+// ... 表示不定长参数
+template<typename ...Ts>
+void magic(Ts... args){
+    // sizeof... 计算不定长参数个数
+    cout << sizeof...(args) << endl;
+}
+void test01(){
+    magic();
+    magic(1, "Hello"); // 可以接收任意数量、任意类型参数
+    magic(2, 'c', 5.5);
+}
+int main(){
+    test01();
+    return 0;
+}
+```
+
+1. 递归模板函数进行参数解包
+
+```C++
+#include <iostream>
+using namespace std;
+template<typename T>
+void print(T value); // 需要提前声明函数，否则报错
+template<typename T, typename ...Ts>
+void print(T value, Ts ... args){
+    cout << value << endl;
+    print(args...); // 需要存在递归终止条件
+}
+// 模板函数重载
+template<typename T>
+void print(T value){
+    std::cout << value << std::endl;
+}
+int main(){
+    print(1, "Hello World", 2.32);
+    return 0;
+}
+```
+
+#### 折叠表达式
+
