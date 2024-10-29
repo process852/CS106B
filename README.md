@@ -244,6 +244,10 @@ type operator++(type ..., int){
   * 确定需要暴露的类公开方法
   * 代码和代码测试的实现
 
+#### Designing a token scanner class
+
+
+
 # 现代C++教程
 
 ## Chatpter2 语言可用性的强化
