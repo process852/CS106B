@@ -246,6 +246,15 @@ type operator++(type ..., int){
 
 #### Designing a token scanner class
 
+## Chapter7 Introduction to Recursion
+
+递归函数必须能够识别可以分解的问题以及递归退出条件。
+
+常见例子：
+
+* 回文串判断
+* 二分搜索
+* 
 
 
 # 现代C++教程
